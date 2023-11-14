@@ -83,7 +83,7 @@ function Answer(props) {
       <div className="answer__top">
         <div className="answer__header">
           <p>Question</p>
-          {/* <p>'the question goes here?'{questionId}</p> */}
+          
           <p>{question?.question}</p>
           <p>{question?.question_description}</p>
         </div>
