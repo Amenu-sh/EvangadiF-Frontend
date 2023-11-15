@@ -40,8 +40,8 @@ function Answer(props) {
       // console.log(answer);
       await axios.post(`${process.env.REACT_APP_base_url}/api/answers/`, {
         answer: answer.answer,
-        questionId: answer.questionId,
-        userId: answer.user_id,
+        questionId: questionId,
+        user_id: userData.user.id,
       });
       // console.log(">>>>> post answer 1");
       console.log(">>>>>>>>  your answer is submitted");
