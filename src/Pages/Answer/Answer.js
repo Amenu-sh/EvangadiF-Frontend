@@ -13,7 +13,7 @@ function Answer(props) {
   // questionId = parseInt(questionId?.slice(1, 2));
 
   const [userData] = useContext(UserContext);
-  console.log(userData);
+  // console.log(userData);
 
   const [answer, setAnswer] = useState({});
   const [prevAnswers, setPrevAnswers] = useState();
@@ -22,11 +22,11 @@ function Answer(props) {
   // get access to the data on state
   const location = useLocation();
   const { question, currentUserId } = location.state;
-  console.log("Location data", question);
+  // console.log("Location data", question);
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     // console.log(e.target.value);
-    await setAnswer({
+    setAnswer({
       answer: e.target.value,
       questionId: question.question_id,
       userId: currentUserId,
@@ -41,7 +41,7 @@ function Answer(props) {
       await axios.post(`${process.env.REACT_APP_base_url}/api/answers/`, {
         answer: answer.answer,
         questionId: answer.questionId,
-        userId: answer.userId,
+        userId: answer.user_id,
       });
       // console.log(">>>>> post answer 1");
       console.log(">>>>>>>>  your answer is submitted");
@@ -62,34 +62,34 @@ function Answer(props) {
       const answers = await axios.get(
         `${process.env.REACT_APP_base_url}/api/answers/${questionId}`
       );
-      console.log(answers.data);
-      console.log(answers);
+      // console.log(answers.data);
+      // console.log(answers);
       // prevAnswers = answers.data.data;
       setPrevAnswers(() => {
-        return answers.answer?.data;
+        return answers.data?.data;
       });
-      console.log(">>>>>>prevAnswers ", prevAnswers);
+      // console.log(">>>>>>prevAnswers ", prevAnswers);
     };
     try {
       fetchAnswers();
 
-      console.log(">>>>> Successfully fetched answers.");
+      // console.log(">>>>> Successfully fetched answers.");
     } catch (err) {
       console.log(">>>>> Can't fetch answers.");
     }
-  }, [userData.user, navigate]);
+  }, [prevAnswers, questionId]);
   return (
     <div className="answer">
       <div className="answer__top">
         <div className="answer__header">
           <p>Question</p>
-          
+
           <p>{question?.question}</p>
           <p>{question?.question_description}</p>
         </div>
 
         <div className="answer__title">
-          {prevAnswers?.length != 0 && <h4>Answer From the others</h4>}
+          {prevAnswers?.length !== 0 && <h4>Answer From the others</h4>}
 
           <div className="answer__list">
             <div className="">

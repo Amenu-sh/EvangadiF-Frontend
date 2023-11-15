@@ -60,8 +60,8 @@ const Home = ({ logout }) => {
             <div key={question.question_id}>
               <div>{question.question}</div>
               <Link
-                to={`/answer/questionId`}
-                // to={`/answer/${question.question_id}`}
+                // to={`/answer/questionId`}
+                to={`/answer/${question.question_id}`}
                 // state prop used to pass the data along the link
                 state={{
                   question: question,
